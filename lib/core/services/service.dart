@@ -126,7 +126,7 @@ class UserFarmerService {
     return ref.snapshots();
   }
 
-  Future<void> getDocumentById(String id) {
+  Future<DocumentSnapshot> getDocumentById(String id) {
     return ref.document(id).get();
   }
 
@@ -161,7 +161,7 @@ class DewormService {
     return ref.snapshots();
   }
 
-  Future<void> getDocumentById(String id) {
+  Future<DocumentSnapshot> getDocumentById(String id) {
     return ref.document(id).get();
   }
 
@@ -198,7 +198,7 @@ class PoultryService {
     return ref.snapshots();
   }
 
-  Future<void> getDocumentById(String id) {
+  Future<DocumentSnapshot> getDocumentById(String id) {
     return ref.document(id).get();
   }
 
@@ -233,7 +233,7 @@ class GoatService {
     return ref.snapshots();
   }
 
-  Future<void> getDocumentById(String id) {
+  Future<DocumentSnapshot> getDocumentById(String id) {
     return ref.document(id).get();
   }
 
@@ -268,7 +268,7 @@ class SheepService {
     return ref.snapshots();
   }
 
-  Future<void> getDocumentById(String id) {
+  Future<DocumentSnapshot> getDocumentById(String id) {
     return ref.document(id).get();
   }
 
@@ -303,7 +303,7 @@ class HorseService {
     return ref.snapshots();
   }
 
-  Future<void> getDocumentById(String id) {
+  Future<DocumentSnapshot> getDocumentById(String id) {
     return ref.document(id).get();
   }
 
@@ -338,7 +338,7 @@ class DonkeyService {
     return ref.snapshots();
   }
 
-  Future<void> getDocumentById(String id) {
+  Future<DocumentSnapshot> getDocumentById(String id) {
     return ref.document(id).get();
   }
 
@@ -373,7 +373,7 @@ class DogService {
     return ref.snapshots();
   }
 
-  Future<void> getDocumentById(String id) {
+  Future<DocumentSnapshot> getDocumentById(String id) {
     return ref.document(id).get();
   }
 
@@ -408,7 +408,7 @@ class CattleService {
     return ref.snapshots();
   }
 
-  Future<void> getDocumentById(String id) {
+  Future<DocumentSnapshot> getDocumentById(String id) {
     return ref.document(id).get();
   }
 

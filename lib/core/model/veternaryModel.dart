@@ -200,6 +200,18 @@ class UserFarmer {
         phoneNumber = snapshot['phoneNumber'],
         county = snapshot['county'],
         email = snapshot['email'];
+  toJson(){
+    return{
+      "nameOfTheFarmaer": nameOfTheFarmer,
+      "nameOfTheFirm": nameOfTheFirm,
+      "phoneNumber": phoneNumber,
+      "county": county,
+      "email": email,
+
+
+    };
+  }
+
 }
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
