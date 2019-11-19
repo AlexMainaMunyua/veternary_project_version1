@@ -480,7 +480,7 @@ class Cattle extends Deworm {
         singleAnimal = snapshot['singleAnimal'],
         groupedAnimal = snapshot['groupedAnimal'],
         singleCalf = snapshot['singleCalf'],
-        groupedCalf = snapshot['groupedCalf'];
+      groupedCalf = snapshot['groupedCalf'];
 
   @override
   toJson() {

@@ -384,6 +384,7 @@ class CRUDHorseModel extends ChangeNotifier {
 
   Future addHorseRecord(Horse data) async {
     var result = await _horseService.addDocument(data.toJson());
+ 
 
     return;
   }
