@@ -6,7 +6,7 @@ class Router{
     switch(settings.name){
       case '/':
         return MaterialPageRoute(
-            builder: (_)=> MyHomePage()
+            builder: (_)=> RootPage(auth: new Auth)
         );
       default:
         return MaterialPageRoute(
