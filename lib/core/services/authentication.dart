@@ -1,5 +1,17 @@
 import 'dart:async';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
+
+@immutable
+class User{
+  const User({
+    @required this.uid,
+    this.email,
+  });
+
+  final String uid;
+  final String email;
+}
 
 abstract class BaseAuth{
   Future<String> signIn(String email, String password);

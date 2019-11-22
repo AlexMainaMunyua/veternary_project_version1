@@ -106,22 +106,32 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
       ),
       body: Stack(
         children: <Widget>[
-          _showBody(),
-          _ShowCircularProgress(),
+          // Text("hello world"),
+          // _showBody(),
+                    // _showLogo(),
+            _showEmailInput(),
+            _showPasswordInput(),
+          
+            // _showSecondaryButton(),
+            // _showErrorMessage(),
+
+          // _showCircularProgress(),
         ],
       ),
     );
   }
 
-  Widget _ShowCircularProgress() {
+  Widget _showCircularProgress() {
     if (_isLoading) {
       return Center(
-        child: CircularProgressIndicator(),
+        // child: CircularProgressIndicator(),
+        child: Text("Is Loading"),
       );
     }
     return Container(
-      height: 0.0,
-      width: 0.0,
+      // height: 0.0,
+      // width: 0.0,
+      child: Text("Error Appeared"),
     );
   }
 
@@ -148,13 +158,16 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
     );
   }
 
+
+
+
   Widget _showBody() {
     return new Container(
       padding: EdgeInsets.all(16.0),
       child: new Form(
         key: _formKey,
         child: new ListView(
-          shrinkWrap: true,
+          // shrinkWrap: true,
           children: <Widget>[
             _showLogo(),
             _showEmailInput(),
@@ -168,7 +181,7 @@ class _LoginSignUpPageState extends State<LoginSignUpPage> {
     );
   }
 
-   _showErrorMessage() {
+  Widget _showErrorMessage() {
     if (_errorMessage.length > 0 && _errorMessage != null) {
       return Text(
         _errorMessage,
