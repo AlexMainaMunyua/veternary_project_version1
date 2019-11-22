@@ -7,18 +7,22 @@ class User{
   const User({
     @required this.uid,
     this.email,
+    this.photoUrl,
+    this.displayName,
   });
 
   final String uid;
   final String email;
+  final String photoUrl;
+  final String displayName;
 }
 
-abstract class BaseAuth{
-  Future<String> signIn(String email, String password);
+abstract class AuthService{
+  Future<User> signInWithEmailAndPassword(String email, String password);
 
-  Future<String> signUp(String email, String password);
+  Future<User> createUserWithEmailAndPassword(String email, String password);
 
-  Future<FirebaseUser> getCurrentUser();
+  Future<User> getCurrentUser();
 
   Future<void> sendEmailVerification();
 
@@ -34,11 +38,54 @@ abstract class BaseAuth{
 
   Future<void> sendPasswordResetMail(String email);
 
+  // Future<void> onAuthStateChanged();
+
 }
 
-class Auth extends BaseAuth{
+class Auth extends AuthService{
 
   final FirebaseAuth _firebaseAuth = FirebaseAuth.instance;
+
+  User _userFromFirebase(FirebaseUser user){
+    if(user == null){
+      return null;
+    }
+    return User(
+      uid: user.uid,
+      email: user.email,
+      displayName: user.displayName,
+      photoUrl: user.photoUrl
+    );
+  }
+  // @override
+  Stream<User> get onAuthStateChanged{
+    return _firebaseAuth.onAuthStateChanged.map(_userFromFirebase);
+  }
+
+    @override
+  Future<User> signInWithEmailAndPassword(String email, String password) async{
+    final AuthResult authResult = await _firebaseAuth.signInWithCredential(
+      EmailAuthProvider.getCredential(
+        email: email,
+        password: password
+      )
+    );
+    return _userFromFirebase(authResult.user);
+  
+  }
+
+  Future<User> createUserWithEmailAndPassword(String email, String password) async {
+   final AuthResult authResult = await _firebaseAuth.createUserWithEmailAndPassword(
+        email: email, password: password);
+        return _userFromFirebase(authResult.user);
+  }
+
+  @override
+  Future<User> getCurrentUser() async {
+    final FirebaseUser user = await _firebaseAuth.currentUser();
+    return _userFromFirebase(user);
+  }
+
 
   @override
   Future<void> changeEmail(String email) async {
@@ -79,11 +126,7 @@ class Auth extends BaseAuth{
     return null;
   }
 
-  @override
-  Future<FirebaseUser> getCurrentUser() async {
-    FirebaseUser user = await _firebaseAuth.currentUser();
-    return user;
-  }
+  
 
   @override
   Future<bool> isEmailVerified() async {
@@ -107,21 +150,10 @@ class Auth extends BaseAuth{
     return null;
   }
 
-  @override
-  Future<String> signIn(String email, String password) async{
-    FirebaseUser user = (await _firebaseAuth.signInWithEmailAndPassword(
-      email: email, password: password)).user;
-    return user.uid;
-  }
 
   @override
   Future<void> signOut() async {
     return _firebaseAuth.signOut();
   }
-
-  Future<String> signUp(String email, String password) async {
-    FirebaseUser user = (await _firebaseAuth.createUserWithEmailAndPassword(
-        email: email, password: password)).user;
-    return user.uid;
-  }
+  
   }
