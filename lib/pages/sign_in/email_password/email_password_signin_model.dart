@@ -3,7 +3,7 @@ import 'package:veternary_project_version1/constants/string.dart';
 import 'package:veternary_project_version1/core/services/authentication.dart';
 import 'package:veternary_project_version1/pages/sign_in/validator.dart';
 
-enum EmailPasswordSignInFormType {signIn, register, forgetPassword}
+enum EmailPasswordSignInFormType {signIn, register, forgotPassword}
 
 class EmailPasswordSignInModel with EmailAndPasswordValidators, ChangeNotifier{
   EmailPasswordSignInModel({
@@ -36,7 +36,7 @@ class EmailPasswordSignInModel with EmailAndPasswordValidators, ChangeNotifier{
         case EmailPasswordSignInFormType.register:
         await auth.createUserWithEmailAndPassword(email, password);
         break;
-        case EmailPasswordSignInFormType.forgetPassword:
+        case EmailPasswordSignInFormType.forgotPassword:
         await auth.sendPasswordResetMail(email);
         updateWith(isLoading: false);
                break;
@@ -87,7 +87,7 @@ class EmailPasswordSignInModel with EmailAndPasswordValidators, ChangeNotifier{
               return <EmailPasswordSignInFormType, String>{
                 EmailPasswordSignInFormType.register: Strings.createAnAccount,
                 EmailPasswordSignInFormType.signIn: Strings.signIn,
-                EmailPasswordSignInFormType.forgetPassword: Strings.sendResetLink,
+                EmailPasswordSignInFormType.forgotPassword: Strings.sendResetLink,
               }[formType];
             }
 
@@ -95,7 +95,7 @@ class EmailPasswordSignInModel with EmailAndPasswordValidators, ChangeNotifier{
               return <EmailPasswordSignInFormType, String>{
                 EmailPasswordSignInFormType.register: Strings.haveAnAccount,
                 EmailPasswordSignInFormType.signIn: Strings.needAnAccount,
-                EmailPasswordSignInFormType.forgetPassword: Strings.backToSignIn,
+                EmailPasswordSignInFormType.forgotPassword: Strings.backToSignIn,
               }[formType];
             }
 
@@ -103,7 +103,7 @@ class EmailPasswordSignInModel with EmailAndPasswordValidators, ChangeNotifier{
               return <EmailPasswordSignInFormType, EmailPasswordSignInFormType>{
                 EmailPasswordSignInFormType.register: EmailPasswordSignInFormType.signIn,
                 EmailPasswordSignInFormType.signIn: EmailPasswordSignInFormType.register,
-                EmailPasswordSignInFormType.forgetPassword:
+                EmailPasswordSignInFormType.forgotPassword:
                 EmailPasswordSignInFormType.signIn,
               }[formType];
             }
@@ -112,7 +112,7 @@ class EmailPasswordSignInModel with EmailAndPasswordValidators, ChangeNotifier{
               return<EmailPasswordSignInFormType, String>{
                 EmailPasswordSignInFormType.register: Strings.registrationFailed,
                 EmailPasswordSignInFormType.signIn: Strings.signInFailed,
-                EmailPasswordSignInFormType.forgetPassword: Strings.passwordResetfailed,
+                EmailPasswordSignInFormType.forgotPassword: Strings.passwordResetfailed,
               }[formType];
             }
             bool get canSubmitEmail{
@@ -128,7 +128,7 @@ class EmailPasswordSignInModel with EmailAndPasswordValidators, ChangeNotifier{
 
             bool get canSubmit{
               final bool canSubmitFields =
-               formType == EmailPasswordSignInFormType.forgetPassword
+               formType == EmailPasswordSignInFormType.forgotPassword
                ? canSubmitEmail
                : canSubmitPassword && canSubmitPassword;
                return canSubmitFields && !isLoading;
@@ -139,6 +139,13 @@ class EmailPasswordSignInModel with EmailAndPasswordValidators, ChangeNotifier{
               final String errorText = email.isEmpty
               ? Strings.invalidEmailEmpty
               : Strings.invalidEmailErrorText;
+              return showErrorText ? errorText : null;
+            }
+            String get passwordErrorText{
+              final bool showErrorText = submitted && !canSubmitPassword;
+              final String errorText = password.isEmpty
+              ? Strings.invalidPasswordEmpty
+              :Strings.invalidPasswordTooShort;
               return showErrorText ? errorText : null;
             }
 
