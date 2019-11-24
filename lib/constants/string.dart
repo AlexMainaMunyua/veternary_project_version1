@@ -19,6 +19,11 @@ static const String logoutFailed = 'Logout Failed';
   static const String haveAnAccount  = 'have An Account';
   static const String needAnAccount = 'need An Account';
   static const String backToSignIn = 'backToSignIn';
+  static const String registrationFailed = 'registration failed';
+  static const String signInFailed= 'Sign in failed';
+  static const String passwordResetfailed = 'Password Reset Failed';
+  static const String invalidEmailEmpty = 'invalid email empty';
+  static const String invalidEmailErrorText = 'invalid email error text';
   // email link page
   static const String isNotSignInWithEmailLinkMessage = 'Invalid activation link.';
   static const String submitEmailAgain = 'Please submit your email address again to receivea new activation link.';

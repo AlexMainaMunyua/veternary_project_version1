@@ -107,5 +107,44 @@ class EmailPasswordSignInModel with EmailAndPasswordValidators, ChangeNotifier{
                 EmailPasswordSignInFormType.signIn,
               }[formType];
             }
+
+            String get errorAlertTitle{
+              return<EmailPasswordSignInFormType, String>{
+                EmailPasswordSignInFormType.register: Strings.registrationFailed,
+                EmailPasswordSignInFormType.signIn: Strings.signInFailed,
+                EmailPasswordSignInFormType.forgetPassword: Strings.passwordResetfailed,
+              }[formType];
+            }
+            bool get canSubmitEmail{
+              return emailSubmitValidator.isValid(email);
+            }
+
+            bool get canSubmitPassword{
+              if(formType == EmailPasswordSignInFormType.register){
+                return passwordRegisterSubmitValidator.isValid(password);
+              }
+              return passwordRegisterSubmitValidator.isValid(password);
+            }
+
+            bool get canSubmit{
+              final bool canSubmitFields =
+               formType == EmailPasswordSignInFormType.forgetPassword
+               ? canSubmitEmail
+               : canSubmitPassword && canSubmitPassword;
+               return canSubmitFields && !isLoading;
+            }
+
+            String get emailErrorText{
+              final bool showErrorText =submitted && !canSubmitEmail;
+              final String errorText = email.isEmpty
+              ? Strings.invalidEmailEmpty
+              : Strings.invalidEmailErrorText;
+              return showErrorText ? errorText : null;
+            }
+
+            @override
+            String toString(){
+              return 'email: $email, password: $password, formType: $formType, isLoading, $submitted';
+            }
   
 }
