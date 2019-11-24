@@ -38,7 +38,9 @@ abstract class AuthService{
 
   Future<void> sendPasswordResetMail(String email);
 
-  // Future<void> onAuthStateChanged();
+  Stream<User> get onAuthStateChanged;
+
+  void dispose();
 
 }
 
@@ -154,6 +156,10 @@ class Auth extends AuthService{
   @override
   Future<void> signOut() async {
     return _firebaseAuth.signOut();
+  }
+
+  @override
+  void dispose() {
   }
   
   }

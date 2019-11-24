@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
-import 'file:///home/aleckie/AndroidStudioProjects/veternary_project_version1/lib/locator.dart';
-import 'file:///home/aleckie/AndroidStudioProjects/veternary_project_version1/lib/route.dart';
+
+import 'package:veternary_project_version1/core/services/authentication.dart';
+import 'package:veternary_project_version1/core/services/email_secure_store.dart';
+import 'package:veternary_project_version1/core/services/firebase_email_link_handler.dart';
+import 'package:veternary_project_version1/pages/auth_widget-builder.dart';
+import 'package:veternary_project_version1/pages/auth_widget.dart';
+import 'package:veternary_project_version1/pages/email-link_error_presenter.dart';
+import 'package:veternary_project_version1/route.dart';
+
+import 'locator.dart';
 
 void main() {
+  Provider.debugCheckInvalidValueType= null;
   setupLocator();
   runApp(MyApp());
 }
@@ -22,17 +32,31 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
-      providers: [],
-      child: MaterialApp(
-        builder: (BuildContext context, Widget widget){
-          ErrorWidget.builder = (FlutterErrorDetails errorDetails){
-            return getErrorWidget(context, errorDetails);
-          };
-          return widget;
-        },
-        debugShowCheckedModeBanner: false,
-        title: 'Veternary App',
-        onGenerateRoute: Router.generateRoute,
+      providers: <SingleChildCloneableWidget>[
+        Provider<EmailSecureStore>(
+          builder: (_)=> EmailSecureStore(flutterSecureStorage: FlutterSecureStorage()),
+        ),
+        ProxyProvider2<AuthService, EmailSecureStore, FirebaseEmailLinkHander>(
+          builder: ( _,AuthService authService, EmailSecureStore storage, __) =>
+              FirebaseEmailLinkHander.createAndConfigure(
+                auth: authService,
+                userCredentialsStorage: storage,
+              ),
+              dispose: (_, linkHandler)=> linkHandler.dispose(),
+        )
+      ],
+      child: AuthWidgetBuilder(
+        builder: (context, AsyncSnapshot<User> userSnapshot) {
+          return MaterialApp(
+           home: EmailLinkErrorPresenter.create(
+             context,
+             child: AuthWidget(userSnapshot: userSnapshot)
+           ),
+            debugShowCheckedModeBanner: false,
+            title: 'Veternary App',
+            onGenerateRoute: Router.generateRoute,
+          );
+        }
       ),
     );
   }
