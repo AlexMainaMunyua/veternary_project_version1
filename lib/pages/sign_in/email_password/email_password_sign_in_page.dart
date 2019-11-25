@@ -111,6 +111,14 @@ exception: exception,
           errorText: model.emailErrorText,
           enabled: !model.isLoading,
         ),
+        autocorrect: false,
+        textInputAction: TextInputAction.next,
+        keyboardAppearance: Brightness.light,
+        onChanged: model.updateEmail,
+        onEditingComplete: _emailEditingComplete,
+        inputFormatters: <TextInputFormatter>[
+          model.emailInputFormatter
+        ],
       );
     }
 
