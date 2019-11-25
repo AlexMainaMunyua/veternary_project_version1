@@ -4,9 +4,9 @@ import 'package:provider/provider.dart';
 import 'package:veternary_project_version1/common_widgets/form_submit_button.dart';
 import 'package:veternary_project_version1/common_widgets/platform_alert_dialog.dart';
 import 'package:veternary_project_version1/common_widgets/platform_exception_alert_dialog.dart';
+import 'package:veternary_project_version1/constants/string.dart';
 import 'package:veternary_project_version1/core/services/authentication.dart';
 import 'package:veternary_project_version1/pages/sign_in/email_password/email_password_signin_model.dart';
-import 'package:veternary_project_version1/pages/sign_in/validator.dart';
 
 class EmailPasswordSignInPage extends StatefulWidget {
   const EmailPasswordSignInPage._(
@@ -67,7 +67,7 @@ exception: exception,
       try{
         final bool success = await model.submit();
         if (success){
-          if(model.formType == EmailPasswordSignInFormType.forgetPassword){
+          if(model.formType == EmailPasswordSignInFormType.forgotPassword){
             await PlatformAlertDialog(
               title: Strings.resetLinkSentTitle,
               content:  Strings.resetLinkSentMessage,
@@ -107,7 +107,7 @@ exception: exception,
         controller: _emailController,
         decoration: InputDecoration(
           labelText: Strings.emailLabel,
-          hintMaxLines: Strings.emailHint,
+          hintText: Strings.emailHint,
           errorText: model.emailErrorText,
           enabled: !model.isLoading,
         ),
