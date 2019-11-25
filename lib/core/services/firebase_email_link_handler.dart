@@ -52,7 +52,7 @@ class FirebaseEmailLinkHander with WidgetsBindingObserver{
     @required this.emailStore,
 
   }){
-    // register widegetbinging observer so that we can detect when the app is resumed
+    // register widegetbinding observer so that we can detect when the app is resumed
      widgetsBinding.addObserver(this);
   }
   final AuthService auth;
@@ -71,7 +71,9 @@ class FirebaseEmailLinkHander with WidgetsBindingObserver{
     );
     //  check dynamic link once on app startip. This is required to process any dynamic linksthta may have opened
     //  the app when it was closed
-    FirebaseDynamicLinks.instance.getInitialLink().then((link)=> linkHandler._processDynamicLink(link?.link));
+    FirebaseDynamicLinks.instance
+    .getInitialLink()
+    .then((link)=> linkHandler._processDynamicLink(link?.link));
     
     //Listen to subsequent links
     FirebaseDynamicLinks.instance.onLink(
@@ -88,7 +90,7 @@ class FirebaseEmailLinkHander with WidgetsBindingObserver{
   }
 
 // clients can listen to this stream and show error alerts when dynamic link  processing fails
-  final BehaviorSubject<EmailLinkError> _errorController = BehaviorSubject<EmailLinkError>();
+  final PublishSubject<EmailLinkError> _errorController = PublishSubject<EmailLinkError>();
   Observable<EmailLinkError> get errorStream => _errorController.stream;
 
 // clients can listen to this stream and show a loading indicator while sign in is in progress
@@ -121,7 +123,7 @@ class FirebaseEmailLinkHander with WidgetsBindingObserver{
   }
 
   @override
-  void didChangeAPPLifecycleState(AppLifecycleState state){
+  void didChangeAppLifecycleState(AppLifecycleState state){
     // when the application come into focus
     if (state == AppLifecycleState.resumed){
       _checkUnprocessedLinks();
@@ -162,13 +164,13 @@ class FirebaseEmailLinkHander with WidgetsBindingObserver{
 
          //check that email is set
 
-        //  final email = await emailStore.getEmail();
-        //  if (email == null){
-        //    _errorController.add(EmailLinkError(
-        //       error: EmaillinkErrorType.emailNotSet
-        //    ));
-        //    return;
-        //  }
+         final email = await emailStore.getEmail();
+         if (email == null){
+           _errorController.add(EmailLinkError(
+              error: EmaillinkErrorType.emailNotSet
+           ));
+           return;
+         }
        
          // sign in
          

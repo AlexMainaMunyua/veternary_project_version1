@@ -50,7 +50,7 @@ this.cancelActionText,
           );
         }
       
-      List<Widget>  _buildActions(context) {
+      List<Widget> _buildActions(context) {
           final List<Widget> actions = <Widget>[];
           if(cancelActionText != null){
             actions.add(

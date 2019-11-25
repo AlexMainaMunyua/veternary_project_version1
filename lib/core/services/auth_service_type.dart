@@ -1,5 +1,4 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
 import 'package:veternary_project_version1/core/services/authentication.dart';
 
 class FirebaseAuthService implements AuthService{

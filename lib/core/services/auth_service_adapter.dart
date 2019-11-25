@@ -43,7 +43,6 @@ class AuthServiceAdapter implements AuthService{
            StreamController<User>.broadcast();
            @override
            Future<void> changeEmail(String email) {
-             // TODO: implement changeEmail
              return null;
            }
          
@@ -97,13 +96,12 @@ class AuthServiceAdapter implements AuthService{
          
            @override
            Future<User> signInWithEmailAndPassword(String email, String password) {
-             // TODO: implement signInWithEmailAndPassword
-             return null;
+             return authservice.signInWithEmailAndPassword(email, password);
            }
          
            @override
            Future<void> signOut() {
-             return null;
+             return authservice.signOut();
            }
          
           

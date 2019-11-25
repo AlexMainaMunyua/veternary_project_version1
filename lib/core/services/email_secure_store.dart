@@ -18,10 +18,7 @@ class EmailSecureStore{
     await flutterSecureStorage.delete(key: StorageUserEmailAddressKey);
   }
 
-  Future<void> getEmail()async{
-    await flutterSecureStorage.read(key: StorageUserEmailAddressKey);
+  Future<String> getEmail()async{
+    return await flutterSecureStorage.read(key: StorageUserEmailAddressKey);
   }
-
-
-
 }
