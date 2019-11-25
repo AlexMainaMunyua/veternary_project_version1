@@ -36,7 +36,7 @@ static const String logoutFailed = 'Logout Failed';
   static const String resetLinkSentMessage ='Check your email to reset your password';
   static const String resetLinkSentTitle = 'Reset link sent';
   static const String invalidPasswordEmpty ='Password can\'t be empty';
-  static const String invalidPasswordTooShort = 'invalidPasswordTooShort';
+  static const String invalidPasswordTooShort = 'Your password is too short';
   // homepage
   static const String homePage = 'HomePage';
   
