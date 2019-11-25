@@ -23,7 +23,6 @@ class FirebaseAuthService implements AuthService{
 
   @override
   Future<void> changePassword(String password) {
-    // TODO: implement changePassword
     return null;
   }
 
@@ -36,7 +35,7 @@ class FirebaseAuthService implements AuthService{
 
   @override
   Future<void> deleteUser() {
-    // TODO: implement deleteUser
+    
     return null;
   }
 
@@ -51,18 +50,18 @@ class FirebaseAuthService implements AuthService{
   }
 
   @override
-  Future<bool> isEmailVerified() {
-    // TODO: implement isEmailVerified
-    return null;
+  Future<bool> isEmailVerified() async {
+   FirebaseUser user = await _firebaseAuth.currentUser();
+   return user.isEmailVerified;
   }
 
   @override
   Stream<User> get onAuthStateChanged => _firebaseAuth.onAuthStateChanged.map(_userFromFirebase);
 
   @override
-  Future<void> sendEmailVerification() {
-    // TODO: implement sendEmailVerification
-    return null;
+  Future<void> sendEmailVerification() async {
+    final FirebaseUser user = await _firebaseAuth.currentUser();
+    user.sendEmailVerification();
   }
 
   @override
@@ -82,7 +81,7 @@ class FirebaseAuthService implements AuthService{
 
   @override
   Future<void> signOut()async {
-    return ;
+    return  _firebaseAuth.signOut();
   }
 
 
