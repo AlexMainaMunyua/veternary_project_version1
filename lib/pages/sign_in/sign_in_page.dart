@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:veternary_project_version1/constants/string.dart';
 import 'package:veternary_project_version1/core/services/authentication.dart';
 import 'package:veternary_project_version1/pages/sign_in/email_password/email_password_sign_in_page.dart';
+import 'package:veternary_project_version1/pages/sign_in/sign_in_button.dart';
 import 'package:veternary_project_version1/pages/sign_in/sign_in_manager.dart';
 
 class SignInPageBuilder extends StatelessWidget {
