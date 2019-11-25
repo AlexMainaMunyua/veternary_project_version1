@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:veternary_project_version1/core/services/authentication.dart';
 
 class AuthWidgetBuilder extends StatelessWidget {
-  const AuthWidgetBuilder({Key key, @required this.builder});
+  const AuthWidgetBuilder({Key key, @required this.builder}): super(key: key);
   final Widget Function(BuildContext, AsyncSnapshot<User>)builder;
   @override
   Widget build(BuildContext context) {
@@ -22,8 +22,9 @@ class AuthWidgetBuilder extends StatelessWidget {
             child: builder(context, snapshot),
 
           );
-          return builder(context, snapshot);
         }
+        return builder(context, snapshot);
+
       },
 
     );

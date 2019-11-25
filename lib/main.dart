@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
+import 'package:veternary_project_version1/core/services/auth_service_adapter.dart';
 
 import 'package:veternary_project_version1/core/services/authentication.dart';
 import 'package:veternary_project_version1/core/services/email_secure_store.dart';
@@ -28,11 +29,20 @@ Widget getErrorWidget(BuildContext context, FlutterErrorDetails error) {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({this.initialAuthServiceType= AuthServiceType.firebase});
+  final AuthServiceType initialAuthServiceType;
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: <SingleChildCloneableWidget>[
+        Provider<AuthService>(
+          builder: (_)=>AuthServiceAdapter(
+            initialAuthServiceType: initialAuthServiceType,
+          ),
+          dispose: (_, AuthService authService)=> authService.dispose(),
+
+        ),
         Provider<EmailSecureStore>(
           builder: (_)=> EmailSecureStore(flutterSecureStorage: FlutterSecureStorage()),
         ),
