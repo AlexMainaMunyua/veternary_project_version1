@@ -20,6 +20,8 @@ this.cancelActionText,
   final String content;
   final String cancelActionText;
   final String defaultActionText;
+
+
   Future<bool> show(BuildContext context) async{
     return Platform.isIOS
     ? await showCupertinoDialog<bool>(
@@ -50,7 +52,7 @@ this.cancelActionText,
           );
         }
       
-      List<Widget> _buildActions(context) {
+      List<Widget> _buildActions(BuildContext context) {
           final List<Widget> actions = <Widget>[];
           if(cancelActionText != null){
             actions.add(
@@ -59,21 +61,31 @@ this.cancelActionText,
                                 cancelActionText,
                                 key: Key(Keys.alertCancel),
                               ),
-                              onPressed: () => Navigator.of(context).pop(true),
-              
+                              onPressed: () => Navigator.of(context).pop(false),
                             ),
                           );
-                          return actions;
                         }
+                        actions.add(
+                          PlatformAlertDialogAction(
+                            child: Text(
+                              defaultActionText,
+                              key: Key(Keys.alertDefault),
+                            ),
+                            onPressed: ()=> Navigator.of(context).pop(true),
+                          )
+
+                        );
+                        return actions;
                       }
                 
               }
               
-              class PlatformAlertDialogAction extends PlatformWidget{
-                PlatformAlertDialogAction({this.child, this.onPressed});
+  class PlatformAlertDialogAction extends PlatformWidget{
+  PlatformAlertDialogAction({this.child, this.onPressed});
               
-              final Widget child;
-              final VoidCallback onPressed;
+  final Widget child;
+  final VoidCallback onPressed;
+  
   @override
   Widget buildCupertinoWidget(_) {
     return CupertinoDialogAction(
