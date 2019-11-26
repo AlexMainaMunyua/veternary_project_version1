@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:veternary_project_version1/common_widgets/avatar.dart';
 import 'package:veternary_project_version1/common_widgets/platform_alert_dialog.dart';
 import 'package:veternary_project_version1/common_widgets/platform_exception_alert_dialog.dart';
-import 'package:veternary_project_version1/constants/keys.dart';
 import 'package:veternary_project_version1/constants/string.dart';
 import 'package:veternary_project_version1/core/services/authentication.dart';
 import 'dart:async';
@@ -35,7 +33,7 @@ Future<void>  _confirmSignOut(BuildContext context) async {
      cancelActionText: Strings.cancel,
      defaultActionText: Strings.logout,
   ).show(context);
-  if(didRequestSignOut ==true){
+  if(didRequestSignOut ==true ){
     _signOut(context);
       }
     }
@@ -46,37 +44,31 @@ Future<void>  _confirmSignOut(BuildContext context) async {
           appBar: AppBar(
             title: Text(Strings.homePage),
             actions: <Widget>[
-              FlatButton(
-                key: Key(Keys.logout,),
-                child: Text(
-                  Strings.logout,
-                  style: TextStyle(
-                    fontSize: 18.0,
-                    color:  Colors.white,
-                  ),
-                ),
-                onPressed: ()=> _confirmSignOut(context),
-                          )
-                        ],
-                        bottom: PreferredSize(
-                          preferredSize: Size.fromHeight(130.0),
-                          child: _buildUserInfo(user),
-                                  ),
-                                ),
-                                drawer: UserMenu(), 
-                                                            
-                              );
-                            }
+              IconButton(
+                icon: Icon(Icons.notifications_active),
+                onPressed: (){},
+              ),
+              IconButton(
+                icon: Icon(Icons.message),
+                onPressed: (){},
+              ),
+              // FlatButton(
+              //   key: Key(Keys.logout,),
+              //   child: Text(
+              //     Strings.logout,
+              //     style: TextStyle(
+              //     fontSize: 18.0,
+              //     color: Colors.white,
+              //     ),
+              //   ),
+              //   onPressed: ()=> _confirmSignOut(context),
+              // )
+            ],
+          ),
+         drawer: UserMenu(), 
+         );
+      }
+}
 
-                        
-                          
-                           Widget  _buildUserInfo(User user) {
-                             return Column(
-                              
-                             );
-                           }
-                }
-    
-    
             
             

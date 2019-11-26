@@ -38,7 +38,22 @@ static const String logoutFailed = 'Logout Failed';
   static const String invalidPasswordEmpty ='Password can\'t be empty';
   static const String invalidPasswordTooShort = 'Your password is too short';
   // homepage
-  static const String homePage = 'HomePage';
-  
+  static const String homePage = 'Admin Dashboard';
+  // user options
+  static const String historicalRecords = 'Historical Records';
+  static const String vaccination = 'Vaccination';
+  static const String artificialInsemination = 'Artificatial Insemination ';
+  static const String deworming = 'Deworning';
+  static const String gallery = 'Gallery';
+  static const String share = 'Share';
+  static const String rateUs = 'Rate us';
+  static const String settings = 'Settings';
+  static const String cattle = 'Cattle';
+  static const String dog = 'Dog';
+  static const String poultry = 'Pourtry';
+  static const String goat = 'Goat';
+  static const String sheep = 'Sheep';
+  static const String horse = 'Horse';
+  static const String donkey = 'Donkey';
 
 }

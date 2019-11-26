@@ -62,6 +62,9 @@ class MyApp extends StatelessWidget {
              context,
              child: AuthWidget(userSnapshot: userSnapshot)
            ),
+           theme: ThemeData(
+             primaryColor: Colors.green
+           ),
             debugShowCheckedModeBanner: false,
             title: 'Veternary App',
             onGenerateRoute: Router.generateRoute,
