@@ -9,7 +9,13 @@ import 'package:veternary_project_version1/constants/string.dart';
 import 'package:veternary_project_version1/core/services/authentication.dart';
 import 'dart:async';
 
+import 'package:veternary_project_version1/pages/userMenu.dart';
+
 class HomePage extends StatelessWidget {
+  const HomePage({this.isLoading});
+  final bool isLoading;
+
+   
 Future<void> _signOut(BuildContext context) async{
   try{
     final AuthService auth = Provider.of<AuthService>(context);
@@ -57,27 +63,16 @@ Future<void>  _confirmSignOut(BuildContext context) async {
                           child: _buildUserInfo(user),
                                   ),
                                 ),
-                              
+                                drawer: UserMenu(), 
+                                                            
                               );
                             }
+
+                        
                           
                            Widget  _buildUserInfo(User user) {
                              return Column(
-                               children: <Widget>[
-                                 Avatar(
-                                   photoUrl: user.photoUrl,
-                                   radius: 50,
-                                   borderColor: Colors.black12,
-                                   borderWidth: 2.0
-                                 ),
-                                 SizedBox(height: 8,),
-                                 if(user.displayName != null)
-                                 Text(
-                                   user.displayName,
-                                   style: TextStyle(color: Colors.white),
-                                 ),
-                                 SizedBox(height: 8,)
-                               ],
+                              
                              );
                            }
                 }
