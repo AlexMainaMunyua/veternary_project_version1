@@ -25,6 +25,9 @@ static const String logoutFailed = 'Logout Failed';
   static const String passwordResetfailed = 'Password reset failed';
   static const String invalidEmailEmpty = 'Email can\'t be empty';
   static const String invalidEmailErrorText = 'Email is invalid';
+  static const String register = 'Register with us';
+  static const String forgotPassword = 'Forgot Password';
+
   // email link page
   static const String isNotSignInWithEmailLinkMessage = 'Invalid activation link.';
   static const String submitEmailAgain = 'Please submit your email address again to receivea new activation link.';

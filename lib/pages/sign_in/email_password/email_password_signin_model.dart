@@ -115,6 +115,14 @@ class EmailPasswordSignInModel with EmailAndPasswordValidators, ChangeNotifier{
                 EmailPasswordSignInFormType.forgotPassword: Strings.passwordResetfailed,
               }[formType];
             }
+            String get title{
+              return <EmailPasswordSignInFormType, String>{
+                EmailPasswordSignInFormType.register: Strings.register,
+                EmailPasswordSignInFormType.signIn: Strings.signIn,
+                EmailPasswordSignInFormType.forgotPassword: Strings.forgotPassword
+
+              }[formType];
+            }
             bool get canSubmitEmail{
               return emailSubmitValidator.isValid(email);
             }

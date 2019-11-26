@@ -49,10 +49,10 @@ class SignInPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 2.0,
-        title: Text(title),
-      ),
+      // appBar: AppBar(
+        // elevation: 2.0,
+        // title: Text(title),
+      // ),
       // drawer: isLoading ? null: DeveloperMenu(),
       body: _buildSignIn(context),
           );
@@ -74,7 +74,7 @@ class SignInPage extends StatelessWidget {
           return Container(
             padding: EdgeInsets.all(16.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 SizedBox(
@@ -88,7 +88,7 @@ class SignInPage extends StatelessWidget {
                   onPressed:
                   isLoading ? null : () => _signInWithEmailAndPassWord(context),
                   textColor: Colors.white,
-                  color: Colors.teal[700]
+                  color: Colors.green
                 )
               ],
             ),

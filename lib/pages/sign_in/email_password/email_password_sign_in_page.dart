@@ -191,7 +191,7 @@ exception: exception,
     return Scaffold(
       appBar: AppBar(
         elevation: 2.0,
-        // title: Text(model.title),
+        title: Text(model.title),
       ),
       backgroundColor: Colors.grey[200],
       body: SingleChildScrollView(
