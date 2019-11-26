@@ -103,8 +103,7 @@ class EmailPasswordSignInModel with EmailAndPasswordValidators, ChangeNotifier{
               return <EmailPasswordSignInFormType, EmailPasswordSignInFormType>{
                 EmailPasswordSignInFormType.register: EmailPasswordSignInFormType.signIn,
                 EmailPasswordSignInFormType.signIn: EmailPasswordSignInFormType.register,
-                EmailPasswordSignInFormType.forgotPassword:
-                EmailPasswordSignInFormType.signIn,
+                EmailPasswordSignInFormType.forgotPassword: EmailPasswordSignInFormType.signIn,
               }[formType];
             }
 
