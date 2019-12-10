@@ -63,10 +63,10 @@ class MyApp extends StatelessWidget {
              child: AuthWidget(userSnapshot: userSnapshot)
            ),
            theme: ThemeData(
-             primaryColor: Colors.green
+             primaryColor: Colors.pink.shade900,            
            ),
             debugShowCheckedModeBanner: false,
-            title: 'Veternary App',
+            title: '99 School',
             onGenerateRoute: Router.generateRoute,
           );
         }
