@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class Deworming extends StatefulWidget {
-  Deworming({Key key}) : super(key: key);
+class AIForm extends StatefulWidget {
+  AIForm({Key key}) : super(key: key);
 
   @override
-  _DewormingState createState() => _DewormingState();
+  _AIFormState createState() => _AIFormState();
 }
 
-class _DewormingState extends State<Deworming> {
+class _AIFormState extends State<AIForm> {
   final _formKey = GlobalKey<FormState>();
 
   @override

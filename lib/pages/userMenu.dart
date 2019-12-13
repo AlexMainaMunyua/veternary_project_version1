@@ -4,11 +4,21 @@ import 'package:veternary_project_version1/common_widgets/avatar.dart';
 import 'package:veternary_project_version1/common_widgets/platform_alert_dialog.dart';
 import 'package:veternary_project_version1/common_widgets/platform_exception_alert_dialog.dart';
 import 'package:veternary_project_version1/constants/string.dart';
+import 'package:veternary_project_version1/core/model/veternaryModel.dart';
 import 'package:veternary_project_version1/core/services/authentication.dart';
 
 import 'dart:async';
 import 'package:flutter/services.dart';
 import 'package:veternary_project_version1/pages/settings/settings.dart';
+import 'package:veternary_project_version1/pages/slaughterhouse_management/slaughterhouse.dart';
+import 'package:veternary_project_version1/pages/vaccination/vaccination.dart';
+import 'package:veternary_project_version1/pages/veterinary_clinical_approach/approach_to_sick_animal/approach_to_sick_animial.dart';
+import 'package:veternary_project_version1/pages/veterinary_clinical_approach/approach_to_sick_animal/approach_to_sudden_death.dart';
+import 'package:veternary_project_version1/pages/veterinary_consultation_farm_visit/veterinary_consultation_farm_visit.dart';
+
+import 'artifical_insemination_record/artificial_insemination_record.dart';
+import 'deworming/deworming.dart';
+import 'veterinary_clinical_approach/approach_to_sick_animal/approach _to_surgical_operation.dart';
 
 class UserMenu extends StatelessWidget {
   const UserMenu({this.isLoading});
@@ -75,71 +85,75 @@ class UserMenu extends StatelessWidget {
     return Expanded(
       child: ListView(
         children: <Widget>[
-          ExpansionTile(
-            leading: Icon(Icons.airline_seat_legroom_normal),
-            title: Text(Strings.deworming),
+           ExpansionTile(
+            leading: Icon(Icons.control_point_duplicate),
+            title: Text('Clinical Approach'),
             children: <Widget>[
-              Divider(),
               ListTile(
-                title: Text(Strings.cattle),
-                trailing: Icon(Icons.arrow_forward_ios),
-              ),
-              Divider(),
+                  title: Text('Sugical Operation'),
+                  onTap: () => Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => SugicalOperation()))),
               ListTile(
-                title: Text(Strings.dog),
-                trailing: Icon(Icons.arrow_forward_ios),
-              ),
-              Divider(),
+                  title: Text('Sick Animal'),
+                  onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SickAnimals()))),
               ListTile(
-                title: Text(Strings.poultry),
-                trailing: Icon(Icons.arrow_forward_ios),
-              ),
-              Divider(),
-              ListTile(
-                title: Text(Strings.goat),
-                trailing: Icon(Icons.arrow_forward_ios),
-              ),
-              Divider(),
-              ListTile(
-                title: Text(Strings.sheep),
-                trailing: Icon(Icons.arrow_forward_ios),
-              ),
-              Divider(),
-              ListTile(
-                title: Text(Strings.horse),
-                trailing: Icon(Icons.arrow_forward_ios),
-              ),
-              Divider(),
-              ListTile(
-                title: Text(Strings.donkey),
-                trailing: Icon(Icons.arrow_forward_ios),
-              ),
+                  title: Text('Sudden Death'),
+                  onTap: () => Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SuddenDeath())))
             ],
           ),
           ListTile(
-            leading: Icon(Icons.assessment),
-            title: Text(Strings.vaccination),
+            leading: Icon(Icons.airline_seat_legroom_normal),
+            title: Text(Strings.deworming),
+            onTap: () => Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Deworming())),
           ),
           ListTile(
-            leading: Icon(Icons.art_track),
-            title: Text(Strings.artificialInsemination),
+              leading: Icon(Icons.assessment),
+              title: Text(Strings.vaccination),
+              onTap: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => VaccinationForm()))),
+          ListTile(
+              leading: Icon(Icons.art_track),
+              title: Text(Strings.artificialInsemination),
+              onTap: () => Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => AIForm()))),
+          ListTile(
+              leading: Icon(Icons.card_travel),
+              title: Text('Consultation farm visit'),
+              onTap: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => ConsulationForm()))),
+         
+          ListTile(
+            leading: Icon(Icons.hourglass_full),
+            title: Text('Slaughter House'),
+            onTap: () => Navigator.push(
+                context, MaterialPageRoute(builder: (context) => Slaughter())),
           ),
           ListTile(
             leading: Icon(Icons.history),
             title: Text(Strings.historicalRecords),
+            /*   onTap: () => Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => VaccinationForm())), */
           ),
           ListTile(
             leading: Icon(Icons.image),
             title: Text(Strings.gallery),
           ),
           Divider(),
-           
-           ListTile(
-          leading: Icon(Icons.share),
-          title: Text(Strings.share),),
-           ListTile(
-          leading: Icon(Icons.rate_review),
-          title: Text(Strings.rateUs),),
+          ListTile(
+            leading: Icon(Icons.share),
+            title: Text(Strings.share),
+          ),
+          ListTile(
+            leading: Icon(Icons.rate_review),
+            title: Text(Strings.rateUs),
+          ),
           SizedBox(
             height: 5,
           ),
@@ -156,7 +170,12 @@ class UserMenu extends StatelessWidget {
                   SizedBox(
                     width: 5,
                   ),
-                  Text('Settings',style: TextStyle(fontFamily: 'Righteous',),)
+                  Text(
+                    'Settings',
+                    style: TextStyle(
+                      fontFamily: 'Righteous',
+                    ),
+                  )
                 ]),
                 onPressed: () {
                   Navigator.push(context,
@@ -172,7 +191,12 @@ class UserMenu extends StatelessWidget {
                   SizedBox(
                     width: 5,
                   ),
-                  Text('Sign Out',style: TextStyle(fontFamily: 'Righteous',),)
+                  Text(
+                    'Sign Out',
+                    style: TextStyle(
+                      fontFamily: 'Righteous',
+                    ),
+                  )
                 ]),
                 onPressed: () {
                   _confirmSignOut(context);

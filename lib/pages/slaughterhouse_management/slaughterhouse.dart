@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class SickAnimals extends StatefulWidget {
-  SickAnimals({Key key}) : super(key: key);
+class Slaughter extends StatefulWidget {
+  Slaughter({Key key}) : super(key: key);
 
   @override
-  _SickAnimalsState createState() => _SickAnimalsState();
+  _SlaughterState createState() => _SlaughterState();
 }
 
-class _SickAnimalsState extends State<SickAnimals> {
+class _SlaughterState extends State<Slaughter> {
   final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {

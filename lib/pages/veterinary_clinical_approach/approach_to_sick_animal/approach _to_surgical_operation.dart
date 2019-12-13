@@ -1,20 +1,23 @@
 import 'package:flutter/material.dart';
 
-class SickAnimals extends StatefulWidget {
-  SickAnimals({Key key}) : super(key: key);
+enum GenderCharacter { male, female }
+
+class SugicalOperation extends StatefulWidget {
+  SugicalOperation({Key key}) : super(key: key);
 
   @override
-  _SickAnimalsState createState() => _SickAnimalsState();
+  _SugicalOperationState createState() => _SugicalOperationState();
 }
 
-class _SickAnimalsState extends State<SickAnimals> {
+class _SugicalOperationState extends State<SugicalOperation> {
   final _formKey = GlobalKey<FormState>();
+  GenderCharacter _character = GenderCharacter.female;
+
   @override
   Widget build(BuildContext context) {
-    
-     return Scaffold(
+    return Scaffold(
       appBar: AppBar(
-        title: Text('Animal Sugical operation Form'),
+        title: Text('Surgery Form'),
         leading: IconButton(
           icon: Icon(Icons.chevron_left),
           color: Colors.white,
@@ -36,7 +39,7 @@ class _SickAnimalsState extends State<SickAnimals> {
           IconButton(
             icon: Icon(Icons.clear_all),
             color: Colors.white,
-            onPressed: (){},
+            onPressed: () {},
             // onPressed: () => _clearDocument(context),
           ),
         ],
@@ -45,14 +48,20 @@ class _SickAnimalsState extends State<SickAnimals> {
         padding: const EdgeInsets.all(12),
         child: ListView(
           children: <Widget>[
+            SizedBox(
+              height: 20,
+            ),
             Form(
               key: _formKey,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   TextFormField(
+                    keyboardType: TextInputType.text,
+                    textCapitalization: TextCapitalization.words,
                     decoration: InputDecoration(
-                      hintText: 'If Others Specify',
+                      // hintText: 'If Others Specify',
+                      labelText: 'If Others Specify',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),
@@ -61,16 +70,43 @@ class _SickAnimalsState extends State<SickAnimals> {
                   SizedBox(
                     height: 10,
                   ),
-                   TextFormField(
+                  Column(
+                    // crossAxisAlignment: CrossAxisAlignment.baseline,
+
+                    children: <Widget>[
+                      RadioListTile<GenderCharacter>(
+                        title: const Text('Male'),
+                        value: GenderCharacter.male,
+                        groupValue: _character,
+                        onChanged: (GenderCharacter value) {
+                          setState(() {
+                            _character = value;
+                          });
+                        },
+                      ),
+                      RadioListTile<GenderCharacter>(
+                        title: const Text('Female'),
+                        value: GenderCharacter.female,
+                        groupValue: _character,
+                        onChanged: (GenderCharacter value) {
+                          setState(() {
+                            _character = value;
+                          });
+                        },
+                      ),
+                    ],
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      hintText: 'Sex of the animal',
+                      labelText: 'Age of animals affected',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),
                     ),
                     validator: (value) {
                       if (value.isEmpty) {
-                        return 'number of adults';
+                        return 'Age of the animal Expected';
                       }
                       return null;
                     },
@@ -78,16 +114,17 @@ class _SickAnimalsState extends State<SickAnimals> {
                   SizedBox(
                     height: 10,
                   ),
-                   TextFormField(
+                  TextFormField(
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      hintText: 'Age of animals affected',
+                      labelText: 'Number of the animal',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),
                     ),
                     validator: (value) {
                       if (value.isEmpty) {
-                        return 'Please number of young ones';
+                        return 'Number of the animal';
                       }
                       return null;
                     },
@@ -95,16 +132,17 @@ class _SickAnimalsState extends State<SickAnimals> {
                   SizedBox(
                     height: 10,
                   ),
-                   TextFormField(
+                  TextFormField(
+                    // keyboardType: TextInputType.text,
                     decoration: InputDecoration(
-                      hintText: 'Number of the animal',
+                      labelText: 'Name of the animal or Identification number',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),
                     ),
                     validator: (value) {
                       if (value.isEmpty) {
-                        return 'Name of the animal';
+                        return 'please fill details';
                       }
                       return null;
                     },
@@ -112,9 +150,28 @@ class _SickAnimalsState extends State<SickAnimals> {
                   SizedBox(
                     height: 10,
                   ),
-                   TextFormField(
+                  TextFormField(
+                    keyboardType: TextInputType.text,
                     decoration: InputDecoration(
-                      hintText: 'Name of the animal/Identification number',
+                      labelText: 'Nature of the operation',
+                      border: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(5.0),
+                      ),
+                    ),
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return 'plaese enter the nature of the operation';
+                      }
+                      return null;
+                    },
+                  ),
+                  SizedBox(
+                    height: 10,
+                  ),
+                  TextFormField(
+                    keyboardType: TextInputType.text,
+                    decoration: InputDecoration(
+                      labelText: 'Body condition of the animal',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),
@@ -129,41 +186,7 @@ class _SickAnimalsState extends State<SickAnimals> {
                   SizedBox(
                     height: 10,
                   ),
-                   TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Nature of the operation',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Please enter Body condition of the animal';
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                   TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'If other specify',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0),
-                      ),
-                    ),
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'Please enter Body condition of the animal';
-                      }
-                      return null;
-                    },
-                  ),
-                  SizedBox(
-                    height: 10,
-                  ),
-                   TextFormField(
+                  TextFormField(
                     decoration: InputDecoration(
                       hintText: 'Date of operation',
                       border: OutlineInputBorder(
@@ -180,7 +203,7 @@ class _SickAnimalsState extends State<SickAnimals> {
                   SizedBox(
                     height: 10,
                   ),
-                   TextFormField(
+                  TextFormField(
                     decoration: InputDecoration(
                       hintText: 'Post operation management',
                       border: OutlineInputBorder(
@@ -197,7 +220,7 @@ class _SickAnimalsState extends State<SickAnimals> {
                   SizedBox(
                     height: 10,
                   ),
-                   TextFormField(
+                  TextFormField(
                     decoration: InputDecoration(
                       hintText: 'Progrosis',
                       border: OutlineInputBorder(
@@ -214,7 +237,7 @@ class _SickAnimalsState extends State<SickAnimals> {
                   SizedBox(
                     height: 10,
                   ),
-                   TextFormField(
+                  TextFormField(
                     decoration: InputDecoration(
                       hintText: 'Name of the farm',
                       border: OutlineInputBorder(
@@ -231,7 +254,7 @@ class _SickAnimalsState extends State<SickAnimals> {
                   SizedBox(
                     height: 10,
                   ),
-                   TextFormField(
+                  TextFormField(
                     decoration: InputDecoration(
                       hintText: 'Name of the owner',
                       border: OutlineInputBorder(
@@ -248,7 +271,7 @@ class _SickAnimalsState extends State<SickAnimals> {
                   SizedBox(
                     height: 10,
                   ),
-                   TextFormField(
+                  TextFormField(
                     decoration: InputDecoration(
                       hintText: 'Mobile number',
                       border: OutlineInputBorder(
@@ -265,7 +288,7 @@ class _SickAnimalsState extends State<SickAnimals> {
                   SizedBox(
                     height: 10,
                   ),
-                   TextFormField(
+                  TextFormField(
                     decoration: InputDecoration(
                       hintText: 'Location',
                       border: OutlineInputBorder(
@@ -333,19 +356,6 @@ class _SickAnimalsState extends State<SickAnimals> {
                   SizedBox(
                     height: 10,
                   ),
-                   
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                 
                 ],
               ),
             )
