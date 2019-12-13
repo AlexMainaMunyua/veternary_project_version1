@@ -16,7 +16,7 @@ class UserMenu extends StatelessWidget {
   @override
 
   // _launcher(String toMailId, String subject, String body) async {
-  //   String url = 'malto:$toMailId?subject=$subject=&body =$body';
+  //   String url = 'mailto:$toMailId?subject=$subject=&body =$body';
   //   if (await canLaunch(url)) {
   //      launch(url);
   //   } else {
@@ -134,12 +134,12 @@ class UserMenu extends StatelessWidget {
           ),
           Divider(),
            
-          //  ListTile(
-          // leading: Icon(Icons.share),
-          // title: Text(Strings.share),),
-          //  ListTile(
-          // leading: Icon(Icons.rate_review),
-          // title: Text(Strings.rateUs),),
+           ListTile(
+          leading: Icon(Icons.share),
+          title: Text(Strings.share),),
+           ListTile(
+          leading: Icon(Icons.rate_review),
+          title: Text(Strings.rateUs),),
           SizedBox(
             height: 5,
           ),

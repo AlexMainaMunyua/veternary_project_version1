@@ -63,7 +63,7 @@ class MyApp extends StatelessWidget {
              child: AuthWidget(userSnapshot: userSnapshot)
            ),
            theme: ThemeData(
-             primaryColor: Colors.pink.shade900,            
+             primaryColor: Colors.green,            
            ),
             debugShowCheckedModeBanner: false,
             title: '99 School',
