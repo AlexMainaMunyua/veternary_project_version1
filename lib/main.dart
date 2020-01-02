@@ -56,7 +56,7 @@ class MyApp extends StatelessWidget {
         )
       ],
       child: AuthWidgetBuilder(
-        builder: (context, AsyncSnapshot<User> userSnapshot) {
+        builder: (context, AsyncSnapshot<User> userSnapshot) { 
           return MaterialApp(
            home: EmailLinkErrorPresenter.create(
              context,

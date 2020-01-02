@@ -1,3 +1,47 @@
+////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////
+
+class UserFarmer {
+  String id;
+  String nameOfTheFarmer;
+  String nameOfTheFarm;
+  String phoneNumber;
+  String county;
+  String country;
+  String email;
+
+  UserFarmer(
+      {this.id,
+      this.nameOfTheFarmer,
+      this.nameOfTheFarm,
+      this.phoneNumber,
+      this.country,
+      this.county,
+      this.email});
+
+  UserFarmer.fromMap(Map snapshot, String id)
+      : id = id ?? "",
+        nameOfTheFarmer = snapshot['nameOfTheFarmer'],
+        nameOfTheFarm = snapshot['nameOfTheFirm'],
+        phoneNumber = snapshot['phoneNumber'],
+        country = snapshot['country'],
+        county = snapshot['county'],
+        email = snapshot['email'];
+  toJson() {
+    return {
+      "nameOfTheFarmaer": nameOfTheFarmer,
+      "nameOfTheFirm": nameOfTheFarm,
+      "phoneNumber": phoneNumber,
+      "county": county,
+      "country": country,
+      "email": email,
+    };
+  }
+}
+//////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+
 class HealthRecord {
   String id;
   String animalSpecies;
@@ -52,6 +96,7 @@ class HealthRecord {
     };
   }
 }
+
 ///////////////////////////////////////////////////////////////////////////////
 //////////////////////////////////////////////////////////////////////////////
 class Vaccination {
@@ -106,6 +151,7 @@ class Vaccination {
     };
   }
 }
+
 ///////////////////////////////////////////////////////////////////////////////
 ///////////////////////////////////////////////////////////////////////////////
 class ArtificialInseminationRecord {
@@ -174,45 +220,7 @@ class ArtificialInseminationRecord {
     };
   }
 }
-////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////
 
-class UserFarmer {
-  String id;
-  String nameOfTheFarmer;
-  String nameOfTheFirm;
-  String phoneNumber;
-  String county;
-  String email;
-
-  UserFarmer(
-      {this.id,
-      this.nameOfTheFarmer,
-      this.nameOfTheFirm,
-      this.phoneNumber,
-      this.county,
-      this.email});
-
-  UserFarmer.fromMap(Map snapshot, String id)
-      : id = id ?? "",
-        nameOfTheFarmer = snapshot['nameOfTheFarmer'],
-        nameOfTheFirm = snapshot['nameOfTheFirm'],
-        phoneNumber = snapshot['phoneNumber'],
-        county = snapshot['county'],
-        email = snapshot['email'];
-  toJson(){
-    return{
-      "nameOfTheFarmaer": nameOfTheFarmer,
-      "nameOfTheFirm": nameOfTheFirm,
-      "phoneNumber": phoneNumber,
-      "county": county,
-      "email": email,
-
-
-    };
-  }
-
-}
 ////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////
 
@@ -480,7 +488,7 @@ class Cattle extends Deworm {
         singleAnimal = snapshot['singleAnimal'],
         groupedAnimal = snapshot['groupedAnimal'],
         singleCalf = snapshot['singleCalf'],
-      groupedCalf = snapshot['groupedCalf'];
+        groupedCalf = snapshot['groupedCalf'];
 
   @override
   toJson() {

@@ -1,4 +1,7 @@
+import 'package:dropdownfield/dropdownfield.dart';
 import 'package:flutter/material.dart';
+
+enum GenderCharacter { male, female }
 
 class SuddenDeath extends StatefulWidget {
   SuddenDeath({Key key}) : super(key: key);
@@ -9,12 +12,32 @@ class SuddenDeath extends StatefulWidget {
 
 class _SuddenDeathState extends State<SuddenDeath> {
   final _formKey = GlobalKey<FormState>();
+  GenderCharacter _character = GenderCharacter.female;
+  Map<String, dynamic> formData;
+  List<String> options = <String>[
+    'Cattle',
+    'Dogs',
+    'Poultry',
+    'Horses',
+    'Donkey',
+    'Cat',
+    'Sheep',
+    'Goats',
+    'Others'
+  ];
+  String dropdownValue = 'Cattle';
+
+  _SuddenDeathState() {
+    formData = {
+      'Animals': 'cattle',
+    };
+  }
+
   @override
   Widget build(BuildContext context) {
-    
-     return Scaffold(
+    return Scaffold(
       appBar: AppBar(
-        title: Text('Sudden death of animal Form'),
+        title: Text('Sudden death Form'),
         leading: IconButton(
           icon: Icon(Icons.chevron_left),
           color: Colors.white,
@@ -36,7 +59,7 @@ class _SuddenDeathState extends State<SuddenDeath> {
           IconButton(
             icon: Icon(Icons.clear_all),
             color: Colors.white,
-            onPressed: (){},
+            onPressed: () {},
             // onPressed: () => _clearDocument(context),
           ),
         ],
@@ -50,16 +73,33 @@ class _SuddenDeathState extends State<SuddenDeath> {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
-                   TextFormField(
+                  ListTile(
+                      title: Text(
+                    'Animal Details',
+                    style: TextStyle(color: Colors.green),
+                  )),
+                  DropDownField(
+                      value: formData['Animals'],
+                      icon: Icon(Icons.location_city),
+                      required: true,
+                      hintText: 'Choose animal',
+                      labelText: 'Animal *',
+                      items: options,
+                      strict: false,
+                      setter: (dynamic newValue) {
+                        formData['Animals'] = newValue;
+                      }),
+                  SizedBox(height: 10),
+                  TextFormField(
                     decoration: InputDecoration(
-                      hintText: 'Name of the animal/Identification number',
+                      labelText: 'Name of the animal or ID number',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),
                     ),
                     validator: (value) {
                       if (value.isEmpty) {
-                        return 'Please enter Body condition of the animal';
+                        return 'Please enter the name of the animal or ID number';
                       }
                       return null;
                     },
@@ -67,26 +107,39 @@ class _SuddenDeathState extends State<SuddenDeath> {
                   SizedBox(
                     height: 10,
                   ),
-                    TextFormField(
-                    decoration: InputDecoration(
-                      hintText: 'Sex of the animal',
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(5.0),
+                  Column(
+                    // crossAxisAlignment: CrossAxisAlignment.baseline,
+
+                    children: <Widget>[
+                      RadioListTile<GenderCharacter>(
+                        title: const Text('Male'),
+                        value: GenderCharacter.male,
+                        groupValue: _character,
+                        onChanged: (GenderCharacter value) {
+                          setState(() {
+                            _character = value;
+                          });
+                        },
                       ),
-                    ),
-                    validator: (value) {
-                      if (value.isEmpty) {
-                        return 'number of adults';
-                      }
-                      return null;
-                    },
+                      RadioListTile<GenderCharacter>(
+                        title: const Text('Female'),
+                        value: GenderCharacter.female,
+                        groupValue: _character,
+                        onChanged: (GenderCharacter value) {
+                          setState(() {
+                            _character = value;
+                          });
+                        },
+                      ),
+                    ],
                   ),
                   SizedBox(
                     height: 10,
                   ),
                   TextFormField(
+                    keyboardType: TextInputType.number,
                     decoration: InputDecoration(
-                      hintText: 'Number of the animal dead',
+                      labelText: 'Number of the animal dead',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),
@@ -95,10 +148,14 @@ class _SuddenDeathState extends State<SuddenDeath> {
                   SizedBox(
                     height: 10,
                   ),
-                 
-                   TextFormField(
+                  ListTile(
+                      title: Text(
+                    'Thesis',
+                    style: TextStyle(color: Colors.green),
+                  )),
+                  TextFormField(
                     decoration: InputDecoration(
-                      hintText: 'When was the case reported',
+                      labelText: 'When was the case reported',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),
@@ -113,9 +170,9 @@ class _SuddenDeathState extends State<SuddenDeath> {
                   SizedBox(
                     height: 10,
                   ),
-                   TextFormField(
+                  TextFormField(
                     decoration: InputDecoration(
-                      hintText: 'What wads the history of the case',
+                      labelText: 'What was the history of the case',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),
@@ -130,10 +187,9 @@ class _SuddenDeathState extends State<SuddenDeath> {
                   SizedBox(
                     height: 10,
                   ),
-                  
-                   TextFormField(
+                  TextFormField(
                     decoration: InputDecoration(
-                      hintText: 'State the mortality rate of the case',
+                      labelText: 'State the mortality rate of the case',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),
@@ -148,9 +204,9 @@ class _SuddenDeathState extends State<SuddenDeath> {
                   SizedBox(
                     height: 10,
                   ),
-                   TextFormField(
+                  TextFormField(
                     decoration: InputDecoration(
-                      hintText: 'At what time the animal/s died',
+                      labelText: 'At what time the animal/s died',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),
@@ -165,9 +221,10 @@ class _SuddenDeathState extends State<SuddenDeath> {
                   SizedBox(
                     height: 10,
                   ),
-                   TextFormField(
+                  TextFormField(
                     decoration: InputDecoration(
-                      hintText: 'What are the sign of the cadaver on the ground',
+                      labelText:
+                          'What are the sign of the cadaver on the ground',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),
@@ -182,10 +239,11 @@ class _SuddenDeathState extends State<SuddenDeath> {
                   SizedBox(
                     height: 10,
                   ),
-                  Text('Did you open up the car case for PM'),
-                   TextFormField(
+                  ListTile(title: Text('Did you open up the car case for PM')),
+                  TextFormField(
                     decoration: InputDecoration(
-                      hintText: 'If yes, what were the signs of the pathological condition',
+                      hintText:
+                          'If yes, what were the signs of the pathological condition',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),
@@ -200,7 +258,7 @@ class _SuddenDeathState extends State<SuddenDeath> {
                   SizedBox(
                     height: 10,
                   ),
-                   TextFormField(
+                  TextFormField(
                     decoration: InputDecoration(
                       hintText: 'If no what could have been the reason',
                       border: OutlineInputBorder(
@@ -217,9 +275,10 @@ class _SuddenDeathState extends State<SuddenDeath> {
                   SizedBox(
                     height: 10,
                   ),
-                   TextFormField(
+                  TextFormField(
                     decoration: InputDecoration(
-                      hintText: 'Did you send any sample to the laboratory yes/no',
+                      hintText:
+                          'Did you send any sample to the laboratory yes/no',
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(5.0),
                       ),
@@ -234,7 +293,7 @@ class _SuddenDeathState extends State<SuddenDeath> {
                   SizedBox(
                     height: 10,
                   ),
-                   TextFormField(
+                  TextFormField(
                     decoration: InputDecoration(
                       hintText: 'What was the laboaratory report',
                       border: OutlineInputBorder(
@@ -251,7 +310,7 @@ class _SuddenDeathState extends State<SuddenDeath> {
                   SizedBox(
                     height: 10,
                   ),
-                   TextFormField(
+                  TextFormField(
                     decoration: InputDecoration(
                       hintText: 'is the cause of death notifiable',
                       border: OutlineInputBorder(
@@ -268,7 +327,7 @@ class _SuddenDeathState extends State<SuddenDeath> {
                   SizedBox(
                     height: 10,
                   ),
-                   TextFormField(
+                  TextFormField(
                     decoration: InputDecoration(
                       hintText: 'If yes , send message to the relevant body',
                       border: OutlineInputBorder(
@@ -285,19 +344,6 @@ class _SuddenDeathState extends State<SuddenDeath> {
                   SizedBox(
                     height: 10,
                   ),
-                   
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                
-                 
                 ],
               ),
             )

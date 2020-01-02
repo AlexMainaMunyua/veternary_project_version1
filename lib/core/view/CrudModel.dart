@@ -5,6 +5,49 @@ import 'package:veternary_project_version1/core/services/service.dart';
 
 import '../../locator.dart';
 
+class CRUDUserFarmerModel extends ChangeNotifier {
+  UserFarmerService _userFarmerService = locator<UserFarmerService>();
+
+  List<UserFarmer> userFarmer;
+
+  Future<List<UserFarmer>> fetchUserFarmerRecords() async {
+    var results = await _userFarmerService.getDataCollection();
+    userFarmer = results.documents
+        .map((doc) => UserFarmer.fromMap(doc.data, doc.documentID))
+        .toList();
+
+    return userFarmer;
+  }
+
+  Stream<QuerySnapshot> fetchUserFarmerRecordAsStream() {
+    return _userFarmerService.streamDataCollection();
+  }
+
+  Future<UserFarmer> getUserFarmerRecordById(String id) async {
+    var doc = await _userFarmerService.getDocumentById(id);
+    return UserFarmer.fromMap(doc.data, doc.documentID);
+  }
+
+  Future removeUserFarmerRecord(String id) async {
+    await _userFarmerService.removeDocument(id);
+    return;
+  }
+
+  Future updateUserFarmerRecord(UserFarmer data, String id) async {
+    await _userFarmerService.updateDocument(data.toJson(), id);
+    return;
+  }
+
+  Future addUserFarmerRecord(UserFarmer data) async {
+    var result = await _userFarmerService.addDocument(data.toJson());
+
+    return;
+  }
+}
+
+////////////////////////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////
+
 class CRUDHealthRecordModel extends ChangeNotifier {
   HealthRecordService _healthRecordService = locator<HealthRecordService>();
 
@@ -140,48 +183,7 @@ class CRUDArtificialInseminationModel extends ChangeNotifier {
 /////////////////////////////////////////////////////////////////////////////////
 /////////////////////////////////////////////////////////////////////////////////
 
-class CRUDUserFarmerModel extends ChangeNotifier {
-  UserFarmerService _userFarmerService = locator<UserFarmerService>();
 
-  List<UserFarmer> userFarmer;
-
-  Future<List<UserFarmer>> fetchUserFarmerRecords() async {
-    var results = await _userFarmerService.getDataCollection();
-    userFarmer = results.documents
-        .map((doc) => UserFarmer.fromMap(doc.data, doc.documentID))
-        .toList();
-
-    return userFarmer;
-  }
-
-  Stream<QuerySnapshot> fetchUserFarmerRecordAsStream() {
-    return _userFarmerService.streamDataCollection();
-  }
-
-  Future<UserFarmer> getUserFarmerRecordById(String id) async {
-    var doc = await _userFarmerService.getDocumentById(id);
-    return UserFarmer.fromMap(doc.data, doc.documentID);
-  }
-
-  Future removeUserFarmerRecord(String id) async {
-    await _userFarmerService.removeDocument(id);
-    return;
-  }
-
-  Future updateUserFarmerRecord(UserFarmer data, String id) async {
-    await _userFarmerService.updateDocument(data.toJson(), id);
-    return;
-  }
-
-  Future addUserFarmerRecord(UserFarmer data) async {
-    var result = await _userFarmerService.addDocument(data.toJson());
-
-    return;
-  }
-}
-
-////////////////////////////////////////////////////////////////////////////////
-//////////////////////////////////////////////////////////////////////////////////
 class CRUDDewormModel extends ChangeNotifier {
   DewormService _dewormService = locator<DewormService>();
 
