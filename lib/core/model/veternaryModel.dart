@@ -3,38 +3,42 @@
 
 class UserFarmer {
   String id;
-  String nameOfTheFarmer;
-  String nameOfTheFarm;
+  String firstName;
+  String lastName;
   String phoneNumber;
-  String county;
+  String farmName;
   String country;
-  String email;
+  String emailAddress;
+  String gender;
 
   UserFarmer(
       {this.id,
-      this.nameOfTheFarmer,
-      this.nameOfTheFarm,
+      this.firstName,
+      this.lastName,
       this.phoneNumber,
+      this.gender,
+      this.farmName,
       this.country,
-      this.county,
-      this.email});
+      this.emailAddress});
 
   UserFarmer.fromMap(Map snapshot, String id)
       : id = id ?? "",
-        nameOfTheFarmer = snapshot['nameOfTheFarmer'],
-        nameOfTheFarm = snapshot['nameOfTheFirm'],
+        firstName = snapshot['firstName'],
+        lastName = snapshot['lastName'],
         phoneNumber = snapshot['phoneNumber'],
+        gender = snapshot['gender'],
         country = snapshot['country'],
-        county = snapshot['county'],
-        email = snapshot['email'];
+        farmName = snapshot['farmName'],
+        emailAddress = snapshot['emailAddress'];
   toJson() {
     return {
-      "nameOfTheFarmaer": nameOfTheFarmer,
-      "nameOfTheFirm": nameOfTheFarm,
+      "firstName": firstName,
+      "lastName": lastName,
       "phoneNumber": phoneNumber,
-      "county": county,
+      "gender": gender,
+      "farmName": farmName,
       "country": country,
-      "email": email,
+      "emailAddress": emailAddress,
     };
   }
 }
