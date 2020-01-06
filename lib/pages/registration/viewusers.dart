@@ -14,6 +14,17 @@ class ViewUser extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text('Registered Users'),
+        actions: <Widget>[
+           IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+               /*  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => ModifyFarmer(user: user))); */
+              },
+            ),
+        ],
       ),
       body: StreamBuilder<QuerySnapshot>(
         stream: registeredUsersProvider.fetchUserFarmerRecordAsStream(),
@@ -60,6 +71,7 @@ class _UserListTileState extends State<UserListTile> {
           title: Text('${widget.userDetails.firstName}' +" "+
               '${widget.userDetails.lastName}'),
           leading: CircleAvatar(
+            backgroundColor: Colors.green,
             radius: 20,
           ),
         ),

@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'registrationForm.dart';
 import 'viewusers.dart';
@@ -17,7 +18,32 @@ class CreateUser extends StatelessWidget {
   }
 }
 
-class UserRow extends StatelessWidget {
+class UserRow extends StatefulWidget {
+  @override
+  _UserRowState createState() => _UserRowState();
+}
+
+class _UserRowState extends State<UserRow> {
+  int documentNumber;
+ /*  Future totalDocuments() async{
+    var respectQuery = Firestore.instance.collection('Users');
+    var querySnapshot = await respectQuery.getDocuments();
+    var totalEquals = querySnapshot.documents.length;
+    return totalEquals;
+  } */
+  
+  void totalDocuments() async{
+    QuerySnapshot _myDoc = await Firestore.instance.collection('Users').getDocuments();
+    List<DocumentSnapshot> _myDocCount = _myDoc.documents;
+    var totalDoc = _myDocCount.length;
+    // print(_myDocCount.length);
+    // print(totalDoc);
+    setState(() {
+      documentNumber = totalDoc;
+    });
+  
+  }
+
   @override
   Widget build(BuildContext context) {
     void choiceAction(String choice) {
@@ -84,7 +110,7 @@ class UserRow extends StatelessWidget {
             ),
             Container(
                 padding: const EdgeInsets.only(right: 24, left: 15),
-                child: Text('Register new farmers',
+                child: Text('Registration dashboard',
                     style:
                         TextStyle(fontSize: 16, fontWeight: FontWeight.w200))),
             Container(
@@ -110,7 +136,7 @@ class UserRow extends StatelessWidget {
                         width: 5,
                       ),
                       Text(
-                        '280',
+                        '${documentNumber}',
                         style: TextStyle(fontSize: 10, color: Colors.blue),
                       )
                     ],
@@ -127,7 +153,7 @@ class UserRow extends StatelessWidget {
                         width: 5,
                       ),
                       Text(
-                        '15',
+                      '',
                         style: TextStyle(
                           fontSize: 10,
                           color: Colors.red,
@@ -142,7 +168,7 @@ class UserRow extends StatelessWidget {
         ),
       ),
     );
-
+ 
     return Container(
       margin: const EdgeInsets.symmetric(
         vertical: 16.0,

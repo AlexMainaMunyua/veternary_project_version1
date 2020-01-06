@@ -28,8 +28,8 @@ class _EmailLinkErrorPresenterState extends State<EmailLinkErrorPresenter> {
   StreamSubscription<EmailLinkError> _onEmailLinkErrorSubscription;
 
   @override
-  void initState(){
-    super.initState();
+  void get initState{
+    super.initState;
     _onEmailLinkErrorSubscription =widget.errorStream.listen((error){
       PlatformAlertDialog(
         title: Strings.activationLinkError,

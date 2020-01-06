@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:veternary_project_version1/core/model/veternaryModel.dart';
 import 'package:veternary_project_version1/core/view/CrudModel.dart';
+import 'package:veternary_project_version1/pages/registration/viewusers.dart';
 
 import 'modifyFarmer.dart';
 
@@ -19,6 +20,15 @@ class UserDetail extends StatelessWidget {
           title: Text('${user.firstName}' + " " + '${user.lastName}'),
           actions: <Widget>[
             IconButton(
+              icon: Icon(Icons.search),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (_) => ModifyFarmer(user: user)));
+              },
+            ),
+            IconButton(
               icon: Icon(Icons.edit),
               onPressed: () {
                 Navigator.push(
@@ -30,9 +40,34 @@ class UserDetail extends StatelessWidget {
             IconButton(
               icon: Icon(Icons.delete_forever),
               onPressed: () async {
+                showDialog(
+                    context: context,
+                    builder: (context) => AlertDialog(
+                          title: Text(
+                            'Are you sure you want to delete' +
+                                " " +
+                                '${user.firstName}',
+                            style: TextStyle(fontSize: 16),
+                          ),
+                          actions: <Widget>[
+                            FlatButton(
+                                child: Text('Yes'),
+                                onPressed: () async {
+                                  await farmerProvider
+                                      .removeUserFarmerRecord(user.id);
+                                  Navigator.pop(context);
+                                }),
+                            FlatButton(
+                              child: Text('No'),
+                              onPressed: () => Navigator.pop(context),
+                            ),
+                          ],
+                        ));
+              },
+              /*  onPressed: () async {
                 await farmerProvider.removeUserFarmerRecord(user.id);
                 Navigator.pop(context);
-              },
+              }, */
             ),
           ],
           bottom: TabBar(
@@ -47,7 +82,7 @@ class UserDetail extends StatelessWidget {
         ),
         body: TabBarView(
           children: <Widget>[
-            Detail(),
+            Detail(user: user),
             Record(),
           ],
         ),
@@ -56,9 +91,15 @@ class UserDetail extends StatelessWidget {
   }
 }
 
-class Detail extends StatelessWidget {
-  const Detail({Key key}) : super(key: key);
+class Detail extends StatefulWidget {
+  final UserFarmer user;
 
+  const Detail({Key key, this.user}) : super(key: key);
+  @override
+  _DetailState createState() => _DetailState();
+}
+
+class _DetailState extends State<Detail> {
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -66,14 +107,109 @@ class Detail extends StatelessWidget {
       child: Table(
         border: TableBorder.all(width: 1.0, color: Colors.grey.shade300),
         children: [
+          TableRow(decoration: BoxDecoration(color: Colors.green), children: [
+            TableCell(
+                child: Padding(
+              padding: const EdgeInsets.all(14.0),
+              child: Text(
+                'Fields',
+                style: TextStyle(color: Colors.white),
+              ),
+            )),
+            TableCell(
+                child: Padding(
+              padding: const EdgeInsets.all(14.0),
+              child: Text(
+                'Details',
+                style: TextStyle(color: Colors.white),
+              ),
+            )),
+          ]),
           TableRow(children: [
             TableCell(
-                child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
-              children: <Widget>[Text('Fields'), Text('Details')],
+                child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('First Name'),
             )),
-          ])
-          TableRow
+            TableCell(
+                child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('${widget.user.firstName}'),
+            )),
+          ]),
+          TableRow(children: [
+            TableCell(
+                child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('Last Name'),
+            )),
+            TableCell(
+                child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('${widget.user.lastName}'),
+            )),
+          ]),
+          TableRow(children: [
+            TableCell(
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text('Farm Name'),
+              ),
+            ),
+            TableCell(
+                child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('${widget.user.farmName}'),
+            )),
+          ]),
+          TableRow(children: [
+            TableCell(
+                child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('Email Address'),
+            )),
+            TableCell(
+                child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('${widget.user.emailAddress}'),
+            )),
+          ]),
+          TableRow(children: [
+            TableCell(
+                child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('Phone Number'),
+            )),
+            TableCell(
+                child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('${widget.user.phoneNumber}'),
+            )),
+          ]),
+          TableRow(children: [
+            TableCell(
+                child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('Country Name'),
+            )),
+            TableCell(
+                child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('${widget.user.country}'),
+            )),
+          ]),
+          TableRow(children: [
+            TableCell(
+                child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('Gender'),
+            )),
+            TableCell(
+                child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text('${widget.user.gender}'),
+            )),
+          ]),
         ],
       ),
     );
